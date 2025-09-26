@@ -1,99 +1,426 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🚀 Test Project - NestJS API with WebSockets
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Modern NestJS server with REST API, WebSockets, PostgreSQL, and file handling support.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 📋 Table of Contents
 
-## Description
+- [Features](#-features)
+- [Technologies](#-technologies)
+- [Installation](#-installation)
+- [Running](#-running)
+- [API Documentation](#-api-documentation)
+- [WebSocket Events](#-websocket-events)
+- [Project Structure](#-project-structure)
+- [Testing](#-testing)
+- [Docker](#-docker)
+- [Environment Variables](#-environment-variables)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## ✨ Features
 
-## Project setup
+### 🔐 Authentication & Authorization
+
+- ✅ User registration with validation
+- ✅ JWT authentication (Access + Refresh tokens)
+- ✅ Password hashing with bcrypt
+- ✅ Protected endpoints with Guards
+- ✅ User profile management
+
+### 📁 File Handling
+
+- ✅ Single and multiple file uploads
+- ✅ File type validation (jpg, jpeg, png, webp, pdf)
+- ✅ File size limit (20MB)
+- ✅ Metadata storage in database
+- ✅ File deletion with filesystem cleanup
+- ✅ CRUD operations for files
+
+### 🔄 WebSocket Real-time Notifications
+
+- ✅ JWT authentication for WebSocket
+- ✅ File upload/delete notifications
+- ✅ User action notifications
+- ✅ Room system
+- ✅ Ping/Pong for connection testing
+
+### 🗄️ Database
+
+- ✅ PostgreSQL with TypeORM
+- ✅ Migrations and synchronization
+- ✅ Transactions
+- ✅ Entity relationships
+
+### 🛡️ Security & Validation
+
+- ✅ Input data validation
+- ✅ Data sanitization
+- ✅ Rate limiting
+- ✅ CORS configuration
+- ✅ Centralized error handling
+
+## 🛠 Technologies
+
+- **Backend**: NestJS, TypeScript
+- **Database**: PostgreSQL, TypeORM
+- **Authentication**: JWT, bcrypt
+- **WebSockets**: Socket.IO
+- **File Upload**: Multer
+- **Validation**: class-validator, class-transformer
+- **Documentation**: Swagger/OpenAPI
+- **Containerization**: Docker, Docker Compose
+- **Package Manager**: Yarn
+
+## 📦 Installation
+
+### Prerequisites
+
+- Node.js 20+
+- PostgreSQL 16+
+- Yarn
+- Docker (optional)
+
+### Clone and Install Dependencies
 
 ```bash
-$ yarn install
+# Clone repository
+git clone <repository-url>
+cd test-project
+
+# Install dependencies
+yarn install
 ```
 
-## Compile and run the project
+## 🚀 Running
+
+### Local Development
+
+1. **Database Setup**
 
 ```bash
-# development
-$ yarn run start
+# Create PostgreSQL database
+createdb myappdb
 
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+# Or use Docker for PostgreSQL
+docker run --name postgres-dev -e POSTGRES_DB=myappdb -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:16-alpine
 ```
 
-## Run tests
+2. **Environment Variables Setup**
 
 ```bash
-# unit tests
-$ yarn run test
+# Copy example configuration
+cp .env.example .env
 
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
+# Edit .env file
+nano .env
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+3. **Run in Development Mode**
 
 ```bash
-$ yarn install -g mau
-$ mau deploy
+# Run with hot reload
+yarn start:dev
+
+# Or run in normal mode
+yarn start
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### Production
 
-## Resources
+```bash
+# Build project
+yarn build
 
-Check out a few resources that may come in handy when working with NestJS:
+# Run production version
+yarn start:prod
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## 📚 API Documentation
 
-## Support
+After starting the server, Swagger documentation is available at:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- **Local**: http://localhost:9000/api/docs
+- **Docker**: http://localhost:5000/api/docs
 
-## Stay in touch
+### Main Endpoints
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+#### 🔐 Authentication
 
-## License
+```
+POST /v1/auth/register     - User registration
+POST /v1/auth/login        - User login
+POST /v1/auth/refresh      - Token refresh
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+#### 👤 Users
+
+```
+GET    /v1/users/me        - Get profile
+PUT    /v1/users/me        - Update profile
+DELETE /v1/users/me        - Deactivate account
+```
+
+#### 📁 Files
+
+```
+POST   /v1/medias          - Upload file
+POST   /v1/medias/bulk     - Upload multiple files
+GET    /v1/medias          - Get file list
+GET    /v1/medias/:id      - Get file by ID
+DELETE /v1/medias/:id      - Delete file
+```
+
+## 🔄 WebSocket Events
+
+### Connection
+
+```javascript
+const socket = io('http://localhost:9000/notifications', {
+  auth: {
+    token: 'YOUR_JWT_TOKEN',
+  },
+});
+```
+
+### Events
+
+#### Files
+
+- `file_uploaded` - File uploaded
+- `file_deleted` - File deleted
+
+#### Users
+
+- `user_registered` - User registered
+- `user_logged_in` - User logged in
+- `user_profile_updated` - Profile updated
+- `user_account_deactivated` - Account deactivated
+
+#### System
+
+- `connected` - Connection established
+- `system_message` - System message
+- `pong` - Ping response
+
+#### Rooms
+
+- `joined_room` - Joined room
+- `left_room` - Left room
+
+### Usage Example
+
+```javascript
+socket.on('file_uploaded', (data) => {
+  console.log('File uploaded:', data);
+});
+
+socket.on('user_logged_in', (data) => {
+  console.log('User logged in:', data);
+});
+
+// Join room
+socket.emit('join_room', { room: 'notifications' });
+
+// Ping for connection testing
+socket.emit('ping');
+```
+
+## 📁 Project Structure
+
+```
+src/
+├── core/                    # Core modules
+│   ├── config/             # Configuration
+│   ├── constants/          # Constants
+│   ├── decorators/         # Decorators
+│   ├── dtos/              # Data Transfer Objects
+│   ├── entities/          # Database entities
+│   ├── filters/           # Exception filters
+│   ├── gateways/          # WebSocket gateways
+│   ├── guards/            # Authorization guards
+│   ├── helpers/           # Helper functions
+│   ├── interceptors/      # Interceptors
+│   ├── messages/          # Error messages
+│   ├── models/            # Data models
+│   ├── modules/           # Core modules
+│   ├── pipes/             # Validation pipes
+│   ├── validation/        # Validation
+│   └── validators/        # Validators
+├── resources/              # API resources
+│   ├── auth/              # Authentication
+│   ├── users/             # Users
+│   └── medias/            # Files
+├── app.module.ts          # Main module
+└── main.ts               # Entry point
+```
+
+## 🧪 Testing
+
+### WebSocket Testing
+
+Open `websocket-test.html` file in browser to test WebSocket connection.
+
+### API Testing
+
+#### User Registration
+
+```bash
+curl -X POST http://localhost:9000/v1/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Test User",
+    "email": "test@example.com",
+    "password": "Password123!"
+  }'
+```
+
+#### User Login
+
+```bash
+curl -X POST http://localhost:9000/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "test@example.com",
+    "password": "Password123!"
+  }'
+```
+
+#### File Upload
+
+```bash
+curl -X POST http://localhost:9000/v1/medias \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -F "file=@example.jpg"
+```
+
+#### Get File List
+
+```bash
+curl -X GET http://localhost:9000/v1/medias \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
+
+## 🐳 Docker
+
+### Running with Docker Compose
+
+```bash
+# Build and run all services
+docker-compose up --build
+
+# Run in background mode
+docker-compose up -d --build
+
+# Stop services
+docker-compose down
+
+# View logs
+docker-compose logs -f
+```
+
+### Available Services
+
+- **API**: http://localhost:5000
+- **PostgreSQL**: localhost:5432
+- **Swagger**: http://localhost:5000/api/docs
+
+## ⚙️ Environment Variables
+
+### Main Settings
+
+```env
+# Application
+NODE_ENV=development
+API_PORT=9000
+ENABLE_SWAGGER=true
+
+# Database
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_USER=postgres
+DATABASE_PASSWORD=postgres
+DATABASE_NAME=myappdb
+DATABASE_SYNC=true
+
+# JWT
+JWT_SECRET=your-secret-key
+JWT_EXPIRES_IN=24h
+JWT_REFRESH_SECRET=your-refresh-secret
+JWT_REFRESH_EXPIRES_IN=5d
+```
+
+### Password Requirements
+
+- Minimum 8 characters
+- Contains lowercase letters
+- Contains uppercase letters
+- Contains numbers
+- Contains special characters
+
+## 🔧 Development Commands
+
+```bash
+# Install dependencies
+yarn install
+
+# Run in development mode
+yarn start:dev
+
+# Build project
+yarn build
+
+# Linting
+yarn lint
+
+# Code formatting
+yarn format
+
+
+# Database migrations
+yarn migration:generate
+yarn migration:run
+yarn migration:revert
+```
+
+## 📝 License
+
+This project is created for educational purposes.
+
+## 👨‍💻 Author
+
+**Lyudvig Asoyan**
+
+---
+
+## 🎯 Implementation Features
+
+### Architecture
+
+- Modular NestJS architecture
+- Separation into core and resources modules
+- Dependency Injection
+- Decorators for validation and documentation
+
+### Security
+
+- JWT tokens with refresh mechanism
+- Password hashing
+- Input validation and sanitization
+- Rate limiting
+- CORS configuration
+
+### Performance
+
+- Database transactions
+- Optimized queries
+- Static file caching
+- WebSocket for real-time notifications
+
+### Scalability
+
+- Docker containerization
+- Horizontal scaling
+- Microservice architecture
+- Separation of concerns
+
+---
+
+**Ready to use! 🚀**

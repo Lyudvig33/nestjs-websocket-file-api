@@ -1,0 +1,39 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: test_project_postgres
+    restart: always
+    ports:
+      - '5436:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    env_file:
+      - docker.env
+    networks:
+      - backend
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: test_project_app
+    restart: always
+    ports:
+      - '6000:5000'
+    volumes:
+      - ./uploads:/usr/src/app/uploads
+    depends_on:
+      - db
+    env_file:
+      - docker.env
+    networks:
+      - backend
+
+volumes:
+  postgres-data:
+
+networks:
+  backend:
+    driver: bridge
