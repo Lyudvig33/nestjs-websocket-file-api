@@ -1,4 +1,4 @@
-# 🚀 Test Project - NestJS API with WebSockets
+# 🚀 NestJS File Management API - REST API with WebSockets
 
 Modern NestJS server with REST API, WebSockets, PostgreSQL, and file handling support.
 
@@ -83,7 +83,7 @@ Modern NestJS server with REST API, WebSockets, PostgreSQL, and file handling su
 ```bash
 # Clone repository
 git clone <repository-url>
-cd test-project
+cd nestjs-file-management-api
 
 # Install dependencies
 yarn install
